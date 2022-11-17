@@ -30,9 +30,9 @@ function getComputerChoice() {
     //Program also needs to declare a possible draw
     //Notification should output both the Player and the AI choice and the winner of the round.
     //The declared winner needs to be put out in a return statement so that 5 Rounds can be at the end.
-let playerSelection=getPlayerChoice();
-let computerSelection=getComputerChoice();
-function playRound(playerSelection, computerSelection) {
+function playRound() {
+    let playerSelection=getPlayerChoice();
+    let computerSelection=getComputerChoice();
     let result;
     if (playerSelection==="Rock" && computerSelection==="Rock") {
         result = "It's a draw!"
@@ -71,13 +71,24 @@ function game() {
     let playerScore = 0
     let aiScore = 0
     for (let i = 0; i < 5; i++) {
-        let roundResult = playRound(playerSelection, computerSelection);
+        let roundResult = playRound();
         if (roundResult === "You win! Rock beats Scissor!" || roundResult === "You win! Paper beats Rock!" || roundResult === "You win! Scissor beats Paper!" ) {
-            playerScore++
+            console.log("You got " + ++playerScore + " Points and the AI has " + aiScore + " Points." + "\n\n" + "You won this Round!")
         }
         else if (roundResult === "You lose! Paper beats Rock!"|| roundResult === "You lose! Scissor beats Paper!"|| roundResult === "You lose! Rock beats Scissor!"){
-            aiScore++
+            console.log("You got " + playerScore + " Points and the AI has " + ++aiScore + " Points." + "\n\n" + "You lost this Round")
+        }
+        else {
+            console.log("You got " + playerScore + " Points and the AI has " + aiScore + " Points." + "\n\n" + "It was a Draw!")
         }
     }
-    console.log(playerScore +" "+ aiScore)
+    if (playerScore > aiScore) {
+        return console.log("Aaaaand the end score is: " + playerScore +" : "+ aiScore +"\n\n"+ "YOU ARE THE  FINAL WINNER!!!")
+    }
+    else if (playerScore < aiScore) {
+        return console.log("Aaaaand the end score is: " + playerScore +" : "+ aiScore +"\n\n"+ "You lost! How sad...")
+    }
+    else {
+        return console.log("Aaaaand the end score is: " + playerScore +" : "+ aiScore +"\n\n"+ "A draw!! How shocking! Wanna try again?")
+    }
 }
